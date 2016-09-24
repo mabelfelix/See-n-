@@ -11,7 +11,14 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        mainPageTemplate = jinja_env.get_template('signin.html')
+        signInPageTemplate = jinja_env.get_template('signin.html')
+
+        if GoogleAuth.isSignedIn.get():
+            user = GoogleUser.getBasicProfile()
+            self.getMain(user)
+
+    def getMain(self):
+        MainPageTemplate = jinja_env.get_template('mainpage.html')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
