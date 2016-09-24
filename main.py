@@ -27,6 +27,7 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        mainPageTemplate = jinja_env.get_template('signin.html')
         self.response.write('Hello world!')
 
 app = webapp2.WSGIApplication([
